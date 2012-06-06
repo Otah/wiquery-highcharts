@@ -21,7 +21,6 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.odlabs.wiquery.core.javascript.JsStatement;
 
 public class WHighChart<V, E extends ISeriesEntry<V>> extends WebMarkupContainer
 {
@@ -57,10 +56,10 @@ public class WHighChart<V, E extends ISeriesEntry<V>> extends WebMarkupContainer
 			&& getOptions().getExporting().getEnabled().booleanValue())
 			response.render(JavaScriptHeaderItem
 				.forReference(WHighChartsExportingJavaScriptResourceReference.get()));
-		response.render(OnDomReadyHeaderItem.forScript(statement().render().toString()));
+		response.render(OnDomReadyHeaderItem.forScript(statement()));
 	}
 
-	public JsStatement statement()
+	public String statement()
 	{
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.getSerializationConfig().setSerializationInclusion(Inclusion.NON_NULL);
@@ -95,11 +94,7 @@ public class WHighChart<V, E extends ISeriesEntry<V>> extends WebMarkupContainer
 			e.printStackTrace();
 		}
 
-		JsStatement jsStatement =
-			new JsStatement().append("var " + getMarkupId() + " = new Highcharts.Chart( "
-				+ optionsStr + " );\n");
-
-		return jsStatement;
+		return "var " + getMarkupId() + " = new Highcharts.Chart( " + optionsStr + " );\n";
 	}
 
 	@SuppressWarnings("unchecked")

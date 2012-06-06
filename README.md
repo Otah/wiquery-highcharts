@@ -1,3 +1,10 @@
+About this fork
+======================
+Connection of WHighCharts Wicket 6 branch to WiQuery is very weak. This fork is trying to remove the dependency on the WiQuery completely.
+
+Maybe it would not make sense from the name of the WHighCharts, but for me the most interesting part of the WHighCharts is the builder pattern and the connection to Wicket. WiQuery plays no role in this.
+
+
 Topicus WHighCharts
 ======================
 
